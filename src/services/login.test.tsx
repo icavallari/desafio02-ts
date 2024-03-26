@@ -4,8 +4,15 @@ describe("login", () => {
   const mockAlert = jest.fn();
   window.alert = mockAlert;
 
-  it("Deve exibir um alert com boas vindas", () => {
-    login();
-    expect(mockAlert).toHaveBeenCalledWith("Bem vindo Rodrigo!");
+  const mockEmail = "icavallari@hotmail.com";
+
+  it("Deve exibir um alert caso email seja valido", async () => {
+    const data = await login(mockEmail);
+    expect(mockAlert).toHaveBeenCalledWith(`Bem vindo ${mockEmail}`);
+  });
+
+  it("Deve exibir erro caso email seja invalido", async () => {
+    const data = await login("email@invalido");
+    expect(mockAlert).toHaveBeenCalledWith("E-mail inválido!");
   });
 });
