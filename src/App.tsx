@@ -1,17 +1,22 @@
-import { ChakraProvider, Box } from "@chakra-ui/react";
-import { login } from "./services/login";
-import { Header } from "./components/Header/Header";
-import { Card } from "./components/Card";
+import { BrowserRouter } from "react-router-dom";
+import { ChakraProvider } from "@chakra-ui/react";
+import { Layout } from "./components/Layout";
+import { AppContextProvider } from "./components/AppContext";
+import MainRoutes from "./routes";
 
 function App() {
   return (
-    <ChakraProvider>
-      <Header />
-      <Box minHeight="100vh" backgroundColor="#9413dc" padding="25px">
-        <Card event={login} />
-      </Box>
-    </ChakraProvider>
+    <BrowserRouter>
+      <AppContextProvider>
+        <ChakraProvider>
+          <Layout>
+            <MainRoutes />
+          </Layout>
+        </ChakraProvider>
+      </AppContextProvider>
+    </BrowserRouter>
   );
 }
 
 export default App;
+
