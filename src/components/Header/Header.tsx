@@ -3,6 +3,7 @@ import "./Header.css";
 import { AppContext } from "../AppContext";
 import { Box, Button, Center, Flex, Spacer } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
+import { changeLocalStorage } from "../../services/storage";
 
 export const Header = () => {
 
@@ -10,8 +11,12 @@ export const Header = () => {
   const navigate = useNavigate()
 
   const logout = () => {
+    
+    changeLocalStorage()
     setIsLoggedIn(false)
+
     navigate('/')
+
   }
 
   return (
@@ -23,7 +28,7 @@ export const Header = () => {
       </Box>
       <Spacer/>
       { isLoggedIn && 
-        <Button onClick={() => logout}>
+        <Button onClick={() => logout()}>
           Sair
         </Button> 
       }

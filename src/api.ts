@@ -4,18 +4,20 @@ export interface User {
     name: string;
     balance: number;
     id: string;
-  }
-
-const conta : User = {
-    email: 'icavallari@hotmail.com',
-    password: '123456',
-    name: 'rodrigo',
-    balance: 2500,
-    id: '1'
 }
 
-export const api = new Promise(resolve => {
+export const api = (email: string, senha: string) => new Promise<User>(resolve => {
     setTimeout(() => {
-        resolve(conta)
+
+        const name = email.split('@')[0]
+        resolve({
+
+            email: email,
+            password: senha,
+            name: name,
+            balance: 2500,
+            id: '1'
+
+        } as User)
     }, 1500);
 })

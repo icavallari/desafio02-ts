@@ -1,13 +1,12 @@
 import { Center, SimpleGrid, Spinner } from "@chakra-ui/react"
 import { CardInfo } from "../components/CardInfo"
 import { useContext, useEffect, useState } from "react";
-import { User, api } from "../api";
+import { User } from "../api";
 import { useParams, useNavigate } from "react-router-dom";
 import { AppContext } from "../components/AppContext";
+import { getAllLocalStorage } from "../services/storage";
 
 export const Conta = () => {
-
-    const context = useContext(AppContext)
 
     const [user, setUser] = useState<null | User>();
     const { id } = useParams()
@@ -19,13 +18,11 @@ export const Conta = () => {
     }
 
     useEffect(() => {
-      const getData = async () => {
-        const data: any | User = await api;
-        setUser(data);
-      };
-  
-      getData();
-    });
+
+        const storage = getAllLocalStorage()        
+        setUser(JSON.parse(storage!))
+
+    }, []);
 
     if ( user && id !== user.id ){
         navigate('/')
